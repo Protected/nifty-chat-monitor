@@ -15,7 +15,7 @@
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @grant       GM_log
-// @resource style https://raw.githubusercontent.com/paul-lrr/nifty-chat-monitor/master/chat-monitor.css
+// @resource style http://www.myshelter.net/chat-monitor.css
 // @resource material-icons https://fonts.googleapis.com/icon?family=Material+Icons
 // ==/UserScript==
 
@@ -95,27 +95,21 @@ var configFields = {
         "section" : ["CSS User Highlighting"],
         "type" : "textarea",
         //Keeping CSS in from chat-monitor-highlight.css as an example of what you can do
-        "default" : ".chat-line__message[data-badges*='Moderator'] .chat-author__display-name {\n" +
-                        "\tcolor: #8383f9 !important;\n" +
-                    "}\n" +
-                    ".chat-line__message[data-badges*='Broadcaster'] {\n" +
-                        "\tbackground-color: #000090 !important;\n" +
-                    "}\n" +
-                    ".chat-line__message[data-badges*='Broadcaster'] .chat-author__display-name {\n" +
-                        "\tcolor: #00b5e0 !important;\n" +
-                    "}\n" +
-                    ".chat-line__message[data-user='LRRbot'] .chat-author__display-name {\n" +
-                        "\tcolor:purple !important;\n" +
-                    "}\n" +
-                    ".chat-line__message[data-user='LRRbot'][data-message*='thanks for']{\n" +
-                        "\tbackground-color:purple !important;\n" +
-                    "}\n" +
-                    ".chat-line__message[data-user='LRRbot'][data-message*='thanks for'] .chat-author__display-name{\n" +
-                        "\tcolor:black !important;\n" +
-                    "}\n" +
-                    ".chat-line__message[data-message*='loadingreadyrun'] {\n" +
-                        "\tbackground-color: #00005d !important;\n" +
-                    "}"
+        "default" : `.chat-line__message[data-badges*='Moderator'] {
+            background-color: #4343d9 !important;
+        }
+        .chat-line__message[data-badges*='Broadcaster'] {
+            background-color: #000040 !important;
+        }
+        .chat-line__message[data-message*='loadingreadyrun'] {
+            background-color: #00005d !important;
+        }
+        .chat-line__message[data-user='BidBot']{
+            background-color: #6d9000 !important;
+        }
+        .chat-line__message[data-message*='!bid'] {
+            background-color: #4d0000 !important;
+        }`
     },
     "RefreshReminder": {
         "label": "",
@@ -267,6 +261,24 @@ function actionFunction() {
 
                         if (!newNode.classList.contains('chat-line__message')) { // Only treat chat messages
                             return;
+                        }
+
+                        let un = newNode.querySelector('.chat-line__username');
+
+                        let badgespan = newNode.querySelector('span:first-child');
+                        badgespan.remove();
+                        badgespan.style.float = "left";
+                        un.appendChild(badgespan);
+
+                        let colon = newNode.querySelector('span[aria-hidden="true"]');
+                        if (colon) colon.remove(); //The ":"
+
+                        let author = newNode.querySelector('.chat-author__display-name');
+                        let rgb = author.style.color.match(/[0-9.]+/g);
+                        let luminance = (rgb[0]/128 + rgb[1]/85 + rgb[2]/255) / 6;
+                        if (luminance < 0.4) {
+                            rgb = [255 - rgb[0], 255 - rgb[1], 255 - rgb[2]];
+                            author.style.color = 'rgb(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ')';
                         }
 
                         //add data-user=<username> for user-based highlighting

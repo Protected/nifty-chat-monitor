@@ -22,7 +22,7 @@ body {
 .chat-input input[type=password],
 .chat-input input[type=search],
 .chat-input {
-    font-size: 2.4rem !important;
+    font-size: 1.4rem !important;
 }
 
 .chat-list .tw-full-height.reverse {
@@ -48,10 +48,24 @@ body {
 }
 .chat-line__message, .chat-line__status, .chat-line__subscribe, .user-notice-line {
     padding:3px 1px 3px 6px !important;
-    font-size:32px !important;
-    line-height:35px !important;
+    font-size:20px !important;
+    line-height:24px !important;
     border-bottom:#444 solid 1px !important;
 }
+
+.chat-line__username {
+    display: block !important;
+    width: 240px !important;
+    text-align: right !important;
+    position: absolute;
+    left: 6px;
+}
+
+.chat-line__message {
+    position: relative;
+    padding-left: 252px !important;
+}
+
 .chat-line__subscribe span {
     color: white;
 }
@@ -62,18 +76,19 @@ body {
     display: inline;
 }
 .chat-line__message .chat-card__link .chat-card__title span {
-    font-size: 32px !important;
-    line-height: 35px !important;
+    font-size: 20px !important;
+    line-height: 24px !important;
     color: white;
 }
 .chat-line__message .chat-card__link .chat-card__title + div span {
-    font-size: 32px !important;
-    line-height: 35px !important;
+    font-size: 20px !important;
+    line-height: 24px !important;
     color: #bbb !important;
 }
 .mention-fragment {
     background-color: transparent !important;
     padding: 0;
+    color: #f0f0a0 !important;
 }
 .special-message {
     background-color: inherit !important;
@@ -82,15 +97,12 @@ body {
     background-color: inherit !important;
 }
 
-.mod-icon {
-    display:none !important;
-}
-.chat-badge {
-    display:none !important;
-}
 img {
     max-width:100%;
     max-height:50vh;
+}
+.link-fragment > img {
+    margin: 3px 6px;
 }
 /* TODO: no whisper tested yet */
 .chat-messages .whisper-line.whisper-incoming {
@@ -98,9 +110,6 @@ img {
 }
 a {
     color:inherit !important;
-}
-.chat-author__display-name {
-    color:green !important;
 }
 span[data-a-target='chat-message-text'], img.chat-image {
     color:white !important;
@@ -143,7 +152,7 @@ span[data-a-target='chat-message-text'], img.chat-image {
     width: 100%;
     height: 100%;
     background-color: black;
-    font-size: 32px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     padding-top: 200px;
