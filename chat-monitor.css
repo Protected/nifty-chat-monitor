@@ -64,6 +64,7 @@ body {
 .chat-line__message {
     position: relative;
     padding-left: 252px !important;
+    min-height: 31px;
 }
 
 .chat-line__subscribe span {

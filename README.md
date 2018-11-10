@@ -1,9 +1,22 @@
+# Niftier Chat Monitor
+
+![smaple image](https://raw.githubusercontent.com/protected/nifty-chat-monitor/master/chat-monitor-sample.png)
+![smaple image](https://raw.githubusercontent.com/protected/nifty-chat-monitor/master/chat-monitor-sample2.png)
+
+This is a modified version of Paul's Nifty Chat Monitor for use in close quarters in an interactive chat window. I recommend a window with 500px or more of width, and non-reversed chat direction.
+
+- Tweaked css, most notably to use background line colors for all special user/message highlights.
+- Usernames are right-aligned and messages are left-aligned to a vertical guideline at around 240px (plus padding). Some people have long enough usernames to require this much width.
+- Badges are displayed and left-aligned in the username containers.
+- Username colors are preserved. If the luminance of a color is too low, it's inverted, in order to ensure good contrast on the dark backgrounds.
+- Uniform color for mentions.
+- Inline image loading (from the original).
+
+Below is the original readme file (mostly still applicable), including the base list of features.
+
 # Nifty Chat Monitor: Twitch bèta support
 
 Userscript for Grease/Tampermonkey to reformat the bèta twitch chat for use on an non-interactive chat monitor. It removes all extraneous formatting to maximize screen real estate for the chat text and adds various hooks to each chat message so that they can be effectively targeted by CSS rules.
-
-![smaple image](https://raw.githubusercontent.com/paul-lrr/nifty-chat-monitor/master/chat-monitor-sample.png)
-*LEFT: default Dark mode twitch Chat -- RIGHT: Nifty Chat Monitor reformated chat*
 
 ### Features
 - removes header
