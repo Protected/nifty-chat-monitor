@@ -1,170 +1,279 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
-
-body {
-    background-color:black !important;
-    font-family: 'Open Sans Condensed', sans-serif !important;
+/* the chat window */
+.chat-room {
+/* should have a black background */
+  background: black !important;
 }
 
-#root .chat-room__header, .chat-list__more-messages-placeholder, .pinned-cheer {
-    display:none !important;
+/* the "STREAM CHAT" header above the chat */
+div.stream-chat-header,
+/* everything that's not the chat itself or the chat input */
+/* this includes the bit/gift sub leaderboard, notifications that a user is giving away subs, hype trains, etc. */
+section.chat-room > div.chat-room__content > div:not(.chat-list--default):not(.chat-list--other):not(.chat-input),
+/* the "Chat paused due to scroll." type messages */
+div.chat-paused-footer,
+/* the scrollbars */
+div.scrollable-area div.simplebar-track {
+/* hide these things */
+  display: none !important;
 }
 
 /* Thanks malc for the fixes to how the chat-interface looks*/
-.chat-input {
-    background: black;
-}
-
 .chat-input select,
 .chat-input textarea,
 .chat-input button,
-.chat-input input[type=text],
-.chat-input input[type=email],
-.chat-input input[type=password],
-.chat-input input[type=search],
+.chat-input input[type="text"],
+.chat-input input[type="email"],
+.chat-input input[type="password"],
+.chat-input input[type="search"],
 .chat-input {
-    font-size: 1.4rem !important;
+  font-size: 1.4rem !important;
 }
 
-.chat-list .tw-full-height.reverse {
-    display:flex !important;
-    flex-direction:column-reverse;
-    padding-bottom:100vh !important;
+/* the container of messages */
+.chat-scrollable-area__message-container {
+  color: #eee;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0 !important;
+}
+.chat-scrollable-area__message-container.reverse {
+  flex-direction: column-reverse;
+  padding-bottom: 100vh !important;
 }
 
-.chat-room__container {
-    top:0px !important;
-    background-color:black !important;
+/* message and notice lines */
+/* specifically normal chat messages and not chat messages embedded in notices */
+.chat-scrollable-area__message-container > .chat-line__message,
+/* the "Welcome to the chat room" message */
+.chat-line__status,
+/* Sub, Gift-Sub and Channel Point Redeem notices */
+.user-notice-line {
+/* pad around messages to make them nice and readable */
+/* we target non-embedded messages specifically to avoid double-padding */
+  padding: 3px 6px !important;
+/* border between messages to improve readability */
+  border-bottom: #444 solid 1px !important;
 }
-.chat-list .tw-full-height {
-    background-color:black !important;
-    color:#eee;
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    padding-top:0 !important;
+/* all chat messages, including those embedded in notices */
+.chat-line__message,
+/* the "Welcome to the chat room" message */
+.chat-line__status,
+/* Sub, Gift-Sub and Channel Point Redeem notices */
+.user-notice-line {
+  font-size: 20px !important;
+  line-height: 24px !important;
+  overflow: hidden;
 }
-.chat-line__message.odd {
-    background-color:#111 !important;
+/* remove hover highlighting that's part of threads */
+.chat-line__message:focus-within .chat-line__message-highlight,
+.chat-line__message:focus .chat-line__message-highlight,
+.chat-line__message:hover .chat-line__message-highlight {
+  background: unset !important;
 }
-.chat-line__message, .chat-line__status, .chat-line__subscribe, .user-notice-line {
-    padding:3px 1px 3px 6px !important;
-    font-size:20px !important;
-    line-height:24px !important;
-    border-bottom:#444 solid 1px !important;
+/* do zebra-striping */
+.chat-line__message.odd,
+.user-notice-line.odd {
+  background-color: #111 !important;
 }
 
-.chat-line__username {
+/* hide reply button */
+.chat-line__reply-icon {
+  display: none !important;
+}
+
+/* message authors */
+/* remove highlighting on hover */
+.chat-line__username-container:hover {
+  background: unset !important;
+}
+
+.chat-line__username-container {
     display: block !important;
-    width: 240px !important;
+    width: 252px !important;
     text-align: right !important;
     position: absolute;
-    left: 6px;
+    left: 2px;
 }
 
-.chat-line__message {
+.chat-line__message-container {
     position: relative;
-    padding-left: 252px !important;
-    min-height: 31px;
+    padding: 0 0 4px 262px !important;
 }
 
-.chat-line__subscribe span {
-    color: white;
+.chat-line__message--emote-button, .chat-line__message--emote {
+    vertical-align: middle !important;
 }
-.chat-line__message .chat-card__link {
-    background-color: #333 !important;
-}
-.chat-line__message .chat-card__link div {
-    display: inline;
-}
-.chat-line__message .chat-card__link .chat-card__title span {
-    font-size: 20px !important;
-    line-height: 24px !important;
-    color: white;
-}
-.chat-line__message .chat-card__link .chat-card__title + div span {
-    font-size: 20px !important;
-    line-height: 24px !important;
-    color: #bbb !important;
-}
-.mention-fragment {
-    background-color: transparent !important;
-    padding: 0;
-    color: #f0f0a0 !important;
-}
-.special-message {
-    background-color: inherit !important;
-}
-.system-msg {
-    background-color: inherit !important;
+.chat-line__message--emote, .chat-line__message--emote-button {
+    max-height: 22px !important;
 }
 
-img {
-    max-width:100%;
-    max-height:50vh;
+.chat-badge {
+    margin: 0 2px !important;
 }
-.link-fragment > img {
-    margin: 3px 6px;
+
+
+/* mod icons */
+.chat-line__username-container > div {
+  /*display: none !important;*/
 }
-/* TODO: no whisper tested yet */
-.chat-messages .whisper-line.whisper-incoming {
-    background-color:#3b010e !important;
+/* badges */
+.chat-badge {
+  /*display: none !important;*/
 }
+/* usernames (incl. localised) */
+.chat-author__display-name,
+.chat-author__intl-login {
+  /*color: green !important;
+  font-weight: 700;*/
+}
+
+/* message content */
+span[data-a-target="chat-message-text"],
+img.chat-image {
+  color: white !important;
+  font-weight: 300 !important;
+}
+/* deleted messages */
+span.chat-line__message--deleted-notice {
+  opacity: 0.2;
+}
+/* highlighted messages */
+span.chat-line__message-body--highlighted {
+/* remove top and bottom borders as they overlap the text on wrapped messages */
+  border-top: none !important;
+  border-bottom: none !important;
+/* negative margin to account for side border thickness */
+  margin-left: -4px !important;
+  margin-right: -4px !important;
+}
+
+/* links */
 a {
-    color:inherit !important;
+  color: inherit !important;
 }
-span[data-a-target='chat-message-text'], img.chat-image {
-    color:white !important;
-    font-weight:300 !important;
-}
-
-.deleted {
-    opacity:0.2;
-}
-.mentioned {
-    color: inherit;
-    background-color: inherit;
+.link-fragment:hover {
+  background: unset !important;
 }
 
-::-webkit-scrollbar {
-    display: none;
+/* mentions in messages */
+span.mention-fragment {
+  background-color: transparent !important;
+  padding: 0;
+}
+/* mentions where we're the recipient */
+span.mention-fragment.mention-fragment--recipient {
+  color: inherit;
+}
+
+/* twitch really tries to push emotes down and we don't want that */
+div.chat-line__message--emote-button,
+div.chat-image__container,
+img.chat-image.chat-line__message--emote {
+  margin: 0;
+  vertical-align: baseline;
+}
+.chat-line__message--emote-button:hover {
+  background: unset !important;
+}
+
+/* inlined images and videos */
+.chat-line__message img,
+.chat-line__message video {
+  max-width: 100%;
+  max-height: 50vh;
+  margin: 0.25em auto 0;
+}
+
+/* clip embeds */
+.chat-line__message .tw-border-radius-medium.tw-elevation-1 {
+  background-color: #333 !important;
+}
+/* preview images */
+.chat-line__message .tw-border-radius-medium.tw-elevation-1 div.chat-card__preview-img {
+  width: 112px;
+  height: 63px;
+}
+/* title */
+.chat-line__message .tw-border-radius-medium.tw-elevation-1 .chat-card__title p {
+  font-size: 32px !important;
+  line-height: 35px !important;
+  color: white;
+}
+/* author */
+.chat-line__message .tw-border-radius-medium.tw-elevation-1 .chat-card__title + div p {
+  font-size: 32px !important;
+  line-height: 35px !important;
+  color: #bbb !important;
+}
+
+/* Clean up notices */
+/* remove star from sub announcements */
+.user-notice-line div.tw-c-text-alt-2 {
+  display: none !important;
+}
+/* channel point icon */
+.user-notice-line span.tw-c-text-alt-2 > div.tw-align-top.tw-inline-flex {
+/* align middle instead of top */
+  vertical-align: 5% !important;
+}
+/* the chatter who subscribed */
+.user-notice-line div.tw-mg-l-05 > p > .tw-block {
+/* their name should be on the same line as their message */
+  display: inline !important;
+}
+/* the notice text part of the sub notice */
+.user-notice-line div.tw-mg-l-05 {
+/* don't indent the text in */
+  margin-left: 0 !important;
+/* but do space it from the message */
+  margin-bottom: 3px !important;
+}
+/* sub messages have a class-less paragraph, which forces small text again */
+.user-notice-line div.tw-mg-l-05 > p,
+/* converted subs have yet another p element that breaks it yet again */
+.user-notice-line div.tw-mg-l-05 > p p.tw-c-text-link {
+  font-size: 32px !important;
+  line-height: 35px !important;
+}
+/* the message attached to the sub notice */
+.user-notice-line div.tw-mg-t-05 {
+/* the spacing from the notice is performed in the notice instead */
+  margin-top: 0 !important;
+}
+/* Sub and Gift-Sub notices have a grey background that we don't want */
+div.tw-c-background-alt {
+  background-color: unset !important;
+}
+/* Sub, Gift-Sub and Channel Point Redeem notices */
+/* very specific to avoid margin being overwritten */
+.tw-mg-y-05.tw-pd-r-2.tw-pd-y-05.user-notice-line {
+/* remove left highlight border */
+  border-left: none;
+/* remove margins - our messages are already nicely spaced */
+  margin: 0 !important;
 }
 
 #settings-wheel {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    color: rgba(255,255,255,0.3);
-    cursor:pointer;
-    z-index: 50;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  z-index: 50;
 }
 #settings-wheel:hover {
-    color: rgba(255,255,255,1);
-}
-
-.sticky-message {
-    display:none !important;
-}
-.chat-messages {
-    top:0px !important;
+  color: rgba(255, 255, 255, 1);
 }
 #hide {
-    z-index: 99;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    padding-top: 200px;
-    display: none;
-}
-body .room-selector__header {
- display:none !important;
-}
-body .pinned-cheer-v2 {
- display:none !important;
-}
-.scrollable-area .simplebar-track {
-    display:none !important;
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 200px;
+  display: none;
 }
